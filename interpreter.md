@@ -48,6 +48,7 @@ Viewing webstart.jnlp using vim, reveals that we are working with Mirth Connect 
 Searching for exploits related to this version of Mirth Connect returns the following exploit, found here:
 
 <img src="Images/05-Google-Search.png" width="600">
+
 https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc
 
 Preparing and executing the payload provides us with a shell on the server:
