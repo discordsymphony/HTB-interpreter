@@ -121,7 +121,7 @@ LISTEN 0      256          0.0.0.0:6661       0.0.0.0:*    users:(("java",pid=35
 LISTEN 0      128             [::]:22            [::]:* 
 ```
 
-With this information, we connect to the SQL server using MariaDB:
+With this information, we connect to the SQL server using MariaDB and discover an encrypted password:
 
 #### Connecting to database:
 
@@ -182,19 +182,6 @@ select * from PERSON_PASSWORD;
 |         2 | u/+LBBOUnadiyFBsMOoIDPLbUR0rk59kEkPU17itdrVWA/kLMt3w+w== | 2025-09-19 09:22:28 |
 +-----------+----------------------------------------------------------+---------------------+
 ```
-
-
-<img src="Images/10-Database-Connect.png" width="600">
-
-Next, we enumerate the database and discover an encrypted password:
-
-<img src="Images/11-Databases.png" width="400">
-
-[...]
-
-<img src="Images/12-Tables.png" width="400">
-
-<img src="Images/13-Database-Password.png" width="600">
 
 Using AI to research the encrypted password, we discover that it uses the PBKDF2-HMAC-SHA256 algorithm:
 
