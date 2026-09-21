@@ -7,6 +7,28 @@ nmap -p0-65535 -sCV 10.129.89.231
 ```
 ### Results
 
+```
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 9.2p1 Debian 2+deb12u7 (protocol 2.0)
+| ssh-hostkey: 
+|   256 07:eb:d1:b1:61:9a:6f:38:08:e0:1e:3e:5b:61:03:b9 (ECDSA)
+|_  256 fc:d5:7a:ca:8c:4f:c1:bd:c7:2f:3a:ef:e1:5e:99:0f (ED25519)
+80/tcp   open  http     Jetty
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-title: Mirth Connect Administrator
+443/tcp  open  ssl/http Jetty
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-title: Mirth Connect Administrator
+| ssl-cert: Subject: commonName=mirth-connect
+| Not valid before: 2025-09-19T12:50:05
+|_Not valid after:  2075-09-19T12:50:05
+|_ssl-date: TLS randomness does not represent time
+6661/tcp open  unknown
+
+```
+
 
 Visiting the webserver on port 443, we find a Mirth Connect instance.  Clicking the Launch Mirth Connect Administrator initiates a download of the file webstart.jnlp.
 
