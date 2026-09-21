@@ -39,7 +39,7 @@ At this point we want to identify any related files of interest for the underlyi
 
 Using ss, we discover that there is a running SQL server on port 3306:
 
-<img src="Images/09-ss.png" width="600">
+<img src="Images/09-Netstat.png" width="600">
 
 With this information, we connect to the SQL server using MariaDB:
 
