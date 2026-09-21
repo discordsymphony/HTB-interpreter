@@ -44,13 +44,11 @@ Viewing webstart.jnlp using vim, reveals that we are working with Mirth Connect 
         <title>Mirth Connect Administrator 4.4.0</title>
 ```
 
-Searching for exploits related to this version of Mirth Connect returns the following exploit:
+Searching for exploits related to this version of Mirth Connect returns the following exploit, found here: https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc.
 
 <img src="Images/05-Google-Search.png" width="600">
 
-This can be found <a href="https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc">here</a>.
-
-Preparing and executing the payload provides us with a shell on the server.
+Preparing and executing the payload provides us with a shell on the server:
 
 #### Start a listener:
 
