@@ -55,21 +55,17 @@ id
 uid=103(mirth) gid=111(mirth) groups=111(mirth)
 ```
 
-
-<img src="Images/06-Payload-Prep.png" width="600">
-
-<img src="Images/07-Listener-Shell.png" width="600">
-
-
 We then use the following commands to stabilize the shell:
 
-**python3 -c ‘import pty;pty.spawn(“/bin/bash”)’**
+```bash
+python3 -c ‘import pty;pty.spawn(“/bin/bash”)’
 
-**export TERM=xterm**
+export TERM=xterm
 
-**ctrl-z**
+ctrl-z
 
-**stty raw -echo; fg**
+stty raw -echo; fg
+```
 
 At this point we want to identify any related files of interest for the underlying Mirth Connect technology. After some research we discover the following file which contains database credentials:
 
