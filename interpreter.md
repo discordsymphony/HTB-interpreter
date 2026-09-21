@@ -66,13 +66,13 @@ stty raw -echo; fg
 
 At this point we want to identify any related files of interest for the underlying Mirth Connect technology. After some research we discover the following file which contains database credentials:
 
-### Extract creds with grep:
+#### Extract creds with grep:
 
 ```
 grep -i  'url\|user\|pass' /usr/local/mirthconnect/conf/mirth.properties
 ```
 
-### Output:
+#### Output:
 
 ```
 database.url = jdbc:mariadb://localhost:3306/mc_bdd_prod
@@ -82,13 +82,13 @@ database.password = MirthPass123!
 
 Using SS, we discover that there is a running SQL server on port 3306:
 
-### Execute SS:
+#### Execute SS:
 
 ```
 ss -ltnp
 ```
 
-### Output:
+#### Output:
 
 ```
 State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                          
