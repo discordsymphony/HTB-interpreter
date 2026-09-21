@@ -8,6 +8,14 @@ nmap -p0-65535 -sCV 10.129.89.231
 ```
 Visiting the webserver on port 443, we find a Mirth Connect instance.  Clicking the Launch Mirth Connect Administrator initiates a download of the file webstart.jnlp.
 
+```bash
+<jnlp codebase="http://10.129.89.231:80" version="4.4.0">
+    	
+    <information>
+        		
+        <title>Mirth Connect Administrator 4.4.0</title>
+```
+
 <img src="Images/03-Landing-Page.png" width="600">
 
 Viewing webstart.jnlp using vim, reveals that we are working with Mirth Connect Administrator 4.4.0:
