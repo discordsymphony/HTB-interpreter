@@ -1,6 +1,6 @@
 # HTB-interpreter
 
-We will begin this machine by using Nmap to scan the server for all open TCP ports:
+We will begin this machine by using Nmap to scan the server for all open TCP ports, service versions and perform script scanning:
 
 ```bash
 nmap -p0-65535 -sCV 10.129.89.231
