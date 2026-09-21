@@ -16,11 +16,11 @@ As Sedric, we dumped the running root processes on the machine and discovered no
 
 **Key Findings**
 
-Finding: CVE-2023-43208
-Severity: Critical 9.8
-Impact: Remote Code Execution on a remote server running Mirth Connect.
+Finding: CVE-2023-43208<br>
+Severity: Critical 9.8<br>
+Impact: Remote Code Execution on a remote server running Mirth Connect.<br><br>
 
-Finding: Python Eval code execution.
-Severity: Critical: 9.9
-Impact: Remote Code Execution leading to privilege escalation on local machine.
+Finding: Python Eval code execution.<br>
+Severity: Critical: 9.9<br>
+Impact: Remote Code Execution leading to privilege escalation on local machine.<br><br>
 
