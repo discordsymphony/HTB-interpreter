@@ -1,5 +1,10 @@
 <img src="Images/01-Banner.png" width="600">
- 
+
+**Difficulty:** Medium
+**OS:** Linux
+**IP:** 10.129.244.184
+**Date:** 21/02/2026
+
 We will begin this machine by using Nmap to scan the server for all open TCP ports:
 
 <img src="Images/02-Nmap.png" width="600">
