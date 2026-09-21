@@ -29,6 +29,7 @@ PORT     STATE SERVICE  VERSION
 
 ```
 
+## User -> Mirth
 
 Visiting the webserver on port 443, we find a Mirth Connect instance.  Clicking the Launch Mirth Connect Administrator initiates a download of the file webstart.jnlp.
 
@@ -83,6 +84,8 @@ export TERM=xterm
 ctrl-z
 stty raw -echo; fg
 ```
+
+## Mirth -> Sedric
 
 At this point we want to identify any related files of interest for the underlying Mirth Connect technology. After some research we discover the following file which contains database credentials:
 
