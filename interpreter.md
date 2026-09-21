@@ -2,9 +2,9 @@
 
 We will begin this machine by using Nmap to scan the server for all open TCP ports:
 
-'''bash
+```bash
 nmap -p- -sV 10.129.244.184
-'''
+```
 <img src="Images/02-Nmap.png" width="600">
 
 Visiting the webserver on port 443, we find a Mirth Connect instance.  Clicking the Launch Mirth Connect Administrator initiates a download of the file webstart.jnlp.
