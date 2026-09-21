@@ -47,11 +47,11 @@ With this information, we connect to the SQL server using MariaDB:
 
 Next, we enumerate the database and discover an encrypted password:
 
-<img src="Images/11-Databases.png" width="600">
+<img src="Images/11-Databases.png" width="400">
 
 [...]
 
-<img src="Images/12-Tables.png" width="600">
+<img src="Images/12-Tables.png" width="400">
 
 <img src="Images/13-Database-Password.png" width="600">
 
