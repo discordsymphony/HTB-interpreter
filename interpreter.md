@@ -48,7 +48,7 @@ Searching for exploits related to this version of Mirth Connect returns the foll
 
 <img src="Images/05-Google-Search.png" width="600">
 
-This can be found here: https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc.
+This can be found <a href="https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc">here</a>.
 
 Preparing and executing the payload provides us with a shell on the server.
 
