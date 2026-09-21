@@ -14,11 +14,12 @@ We began this machine with a standard Nmap scan which led to the discovery of a 
 
 As Sedric, we dumped the running root processes on the machine and discovered notif.py was running on localhost. Analysis of this file revealed that it was using a dangerous Python Eval statement. As a result, we forwarded port 54321 and sent a request to test the dangerous function, which proved successful. After some time, we were able to come up with a working exploit that returned a reverse shell to our attacker listener as root and we had completed the machine.
 
+
 **Key Findings**
 
 Finding: CVE-2023-43208<br>
 Severity: Critical 9.8<br>
-Impact: Remote Code Execution on a remote server running Mirth Connect.<br><br>
+Impact: Remote Code Execution on a remote server running Mirth Connect.<br>
 
 Finding: Python Eval code execution.<br>
 Severity: Critical: 9.9<br>
