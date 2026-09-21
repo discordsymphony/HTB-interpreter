@@ -27,13 +27,13 @@ Preparing and executing the payload provides us with a shell on the server:
 
 We then use the following commands to stabilize the shell:
 
-python3 -c ‘import pty;pty.spawn(“/bin/bash”)’
+**python3 -c ‘import pty;pty.spawn(“/bin/bash”)’**
 
-export TERM=xterm
+**export TERM=xterm**
 
-ctrl-z
+**ctrl-z**
 
-stty raw -echo; fg
+**stty raw -echo; fg**
 
 At this point we want to identify any related files of interest for the underlying Mirth Connect technology. After some research we discover the following file which contains database credentials:
 
