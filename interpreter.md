@@ -12,7 +12,7 @@ Visiting the webserver on port 443, we find a Mirth Connect instance.  Clicking 
 
 Viewing webstart.jnlp using vim, reveals that we are working with Mirth Connect Administrator 4.4.0:
  
-```bash
+```jnlp
 <jnlp codebase="http://10.129.89.231:80" version="4.4.0">
     	
     <information>
