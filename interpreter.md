@@ -59,11 +59,8 @@ We then use the following commands to stabilize the shell:
 
 ```bash
 python3 -c ‘import pty;pty.spawn(“/bin/bash”)’
-
 export TERM=xterm
-
 ctrl-z
-
 stty raw -echo; fg
 ```
 
