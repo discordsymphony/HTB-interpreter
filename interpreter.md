@@ -185,7 +185,9 @@ select * from PERSON_PASSWORD;
 
 Using AI to research the encrypted password, we discover that it uses the PBKDF2-HMAC-SHA256 algorithm:
 
-<img src="Images/14-Hash-Algorithm.png" width="600">
+```
+This exact hash (u/+LBBOUnadiyFBsMOoIDPLbUR0rk59kEkPU17itdrVWA/kLMt3w+w==) is from Mirth Connect 4.4.0 and uses PBKDF2-HMAC-SHA256 with 600,000 iterations and an 8-byte salt. The stored value is just Base64(8-byte-salt ‖ 32-byte-derived-key) — there's no separate salt column.
+```
 
 We can recover the plaintext value by splitting the ciphertext into a base64 salt and a base64 hash:
 
